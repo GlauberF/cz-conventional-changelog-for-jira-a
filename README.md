@@ -34,7 +34,7 @@ and then add the following to .czrc:
 
 ### Usage
 
-gif aqui
+![Video of terminal when using cz-conventional-changelog-for-jira](https://raw.githubusercontent.com/digitalroute/cz-conventional-changelog-for-jira/master/images/demo.gif)
 
 ## Configuration
 
