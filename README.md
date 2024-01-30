@@ -11,7 +11,7 @@
 ### Installation
 
 ```bash
-npm install commitizen path_github
+npm install commitizen https://github.com/GlauberF/cz-conventional-changelog-for-jira-a --save-dev
 ```
 
 and then add the following to package.json:
@@ -20,12 +20,15 @@ and then add the following to package.json:
 {
   "scripts": {
     "commit": "git-cz"
-  },
-  "config": {
-    "commitizen": {
-      "path": ""
-    }
   }
+}
+```
+and then add the following to .czrc:
+```json
+{
+  "path": "./node_modules/@glauberfunez/cz-conventional-changelog-for-jira",
+  "skipBreaking":true,
+  ...
 }
 ```
 
@@ -81,6 +84,11 @@ Like commitizen, you can specify the configuration of cz-conventional-changelog-
 
 pre-type:
 
+without type and scope:
+```text
+JIRA-1234 commit subject
+```
+with type and scope:
 ```text
 JIRA-1234 type(scope): commit subject
 ```
@@ -134,7 +142,8 @@ module.exports = custom({
   },
   skipScope: false,
   scopes: ['myScope1', 'myScope2'],
-  customScope: true
+  customScope: true,
+  txtSubject: 'Here you can include the text you think is best to ask the user for the subject'
 });
 ```
 
