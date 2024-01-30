@@ -23,7 +23,7 @@ and then add the following to package.json:
   }
 }
 ```
-and then add the following to .czrc:
+and then add the following to `.czrc`:
 ```json
 {
   "path": "./node_modules/@glauberfunez/cz-conventional-changelog-for-jira",
@@ -166,4 +166,4 @@ module.exports = custom({
 
 ### Commitlint
 
-If using the [commitlint](https://github.com/conventional-changelog/commitlint) js library, the "maxHeaderWidth" configuration property will default to the configuration of the "header-max-length" rule instead of the hard coded value of 72. This can be ovewritten by setting the 'maxHeaderWidth' configuration in package.json or the CZ_MAX_HEADER_WIDTH environment variable.
+If using the [commitlint](https://github.com/conventional-changelog/commitlint) js library, the "maxHeaderWidth" configuration property will default to the configuration of the "header-max-length" rule instead of the hard coded value of 72. This can be ovewritten by setting the 'maxHeaderWidth' configuration in `.czrc` or the CZ_MAX_HEADER_WIDTH environment variable.
