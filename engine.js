@@ -62,10 +62,10 @@ module.exports = function(options) {
 
   // Generate Jira issue prepend and append decorators
   const decorateJiraIssue = function(jiraIssue, options) {
-    const prepend = options.jiraPrepend || ''
-    const append = options.jiraAppend || ''
-    return jiraIssue ? `${prepend}${jiraIssue}${append} `: '';
-  }
+    const prepend = options.jiraPrepend || '';
+    const append = options.jiraAppend || '';
+    return jiraIssue ? `${prepend}${jiraIssue}${append} ` : '';
+  };
 
   const types = getFromOptionsOrDefaults('types');
 
@@ -80,7 +80,9 @@ module.exports = function(options) {
   const minHeaderWidth = getFromOptionsOrDefaults('minHeaderWidth');
   const maxHeaderWidth = getFromOptionsOrDefaults('maxHeaderWidth');
 
-  const branchName = execSync('git branch --show-current').toString().trim();
+  const branchName = execSync('git branch --show-current')
+    .toString()
+    .trim();
   const jiraIssueRegex = /(?<jiraIssue>(?<!([a-zA-Z0-9]{1,10})-?)[a-zA-Z0-9]+-\d+)/;
   const matchResult = branchName.match(jiraIssueRegex);
   const jiraIssue =
@@ -90,7 +92,7 @@ module.exports = function(options) {
     Array.isArray(options.scopes) &&
     options.scopes.length > 0;
   const customScope = !options.skipScope && hasScopes && options.customScope;
-  const scopes = customScope ? [...options.scopes, 'custom' ]: options.scopes;
+  const scopes = customScope ? [...options.scopes, 'custom'] : options.scopes;
 
   const getProvidedScope = function(answers) {
     return answers.scope === 'custom' ? answers.customScope : answers.scope;
@@ -155,7 +157,9 @@ module.exports = function(options) {
           choices: hasScopes ? scopes : undefined,
           message:
             `${options.txtScope}: ` +
-            (hasScopes ? `(${options.txtScopeListConfirmation})` : `(${options.txtScopeInputConfirmation})`),
+            (hasScopes
+              ? `(${options.txtScopeListConfirmation})`
+              : `(${options.txtScopeInputConfirmation})`),
           default: options.defaultScope,
           filter: function(value) {
             return value.trim().toLowerCase();
@@ -164,7 +168,7 @@ module.exports = function(options) {
         {
           type: 'input',
           name: 'customScope',
-          when: (({ scope }) => scope === 'custom'),
+          when: ({ scope }) => scope === 'custom',
           message: options.txtCustomScope
         },
         {
@@ -181,11 +185,20 @@ module.exports = function(options) {
             }
 
             const jiraWithDecorators = decorateJiraIssue(answers.jira, options);
-            return getJiraIssueLocation(options.jiraLocation, answers.type, scope, jiraWithDecorators, '').trim();
+            return getJiraIssueLocation(
+              options.jiraLocation,
+              answers.type,
+              scope,
+              jiraWithDecorators,
+              ''
+            ).trim();
           },
           validate: input =>
             input.length >= minHeaderWidth ||
-            options.txtSubjectMinCharacters.replace('{MIN_VALUE}', minHeaderWidth),
+            options.txtSubjectMinCharacters.replace(
+              '{MIN_VALUE}',
+              minHeaderWidth
+            ),
           filter: function(subject) {
             return filterSubject(subject);
           }
@@ -232,8 +245,7 @@ module.exports = function(options) {
           type: 'input',
           name: 'issuesBody',
           default: '-',
-          message:
-            `${options.txtIssuesBody}:\n`,
+          message: `${options.txtIssuesBody}:\n`,
           when: function(answers) {
             return (
               answers.isIssueAffected && !answers.body && !answers.breakingBody
@@ -269,7 +281,13 @@ module.exports = function(options) {
         const jiraWithDecorators = decorateJiraIssue(answers.jira, options);
 
         // Hard limit this line in the validate
-        const head = getJiraIssueLocation(options.jiraLocation, answers.type, scope, jiraWithDecorators, answers.subject);
+        const head = getJiraIssueLocation(
+          options.jiraLocation,
+          answers.type,
+          scope,
+          jiraWithDecorators,
+          answers.subject
+        );
 
         // Wrap these lines at options.maxLineWidth characters
         let body = answers.body ? wrap(answers.body, wrapOptions) : false;
@@ -277,7 +295,7 @@ module.exports = function(options) {
           if (body === false) {
             body = '';
           } else {
-            body += "\n\n";
+            body += '\n\n';
           }
           body += jiraWithDecorators.trim();
         }
@@ -289,7 +307,9 @@ module.exports = function(options) {
           : '';
         breaking = breaking ? wrap(breaking, wrapOptions) : false;
 
-        const issues = answers.issues ? wrap(answers.issues, wrapOptions) : false;
+        const issues = answers.issues
+          ? wrap(answers.issues, wrapOptions)
+          : false;
 
         const fullCommit = filter([head, body, breaking, issues]).join('\n\n');
 
