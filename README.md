@@ -34,7 +34,7 @@ and then add the following to .czrc:
 
 ### Usage
 
-![Video of terminal when using cz-conventional-changelog-for-jira](https://github.com/GlauberF/cz-conventional-changelog-for-jira-a/assets/11314585/50fe54ac-9209-4070-aa75-b58494af8e18)
+[Video of terminal when using cz-conventional-changelog-for-jira](https://github.com/GlauberF/cz-conventional-changelog-for-jira-a/assets/11314585/50fe54ac-9209-4070-aa75-b58494af8e18)
 
 
 
