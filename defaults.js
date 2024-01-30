@@ -6,7 +6,7 @@ module.exports = {
   skipScope: true,
   skipType: true,
   skipDescription: false,
-  skipBreaking: false,
+  skipBreaking: true,
   customScope: false,
   maxHeaderWidth: 72,
   minHeaderWidth: 2,
