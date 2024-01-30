@@ -36,6 +36,9 @@ and then add the following to .czrc:
 
 [Video of terminal when using cz-conventional-changelog-for-jira](https://github.com/GlauberF/cz-conventional-changelog-for-jira-a/assets/11314585/50fe54ac-9209-4070-aa75-b58494af8e18)
 
+Result
+![Captura de tela de 2024-01-30 11-37-30](https://github.com/GlauberF/cz-conventional-changelog-for-jira-a/assets/11314585/9bd064ef-ffca-4d8b-9afc-d98da4114fec)
+
 
 
 ## Configuration
